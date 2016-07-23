@@ -16,17 +16,7 @@
 			</div>
 		</div>
 	</section>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li class="active"><a href="/customers">Customers</a></li>
-            </ul>
-        </div>
-    </nav>
+	<%@include file="template/navigation.jsp"%>
 	<section class="container">
         <a href="/customers/add"><button type="button" class="btn btn-info">Add Customer</button></a>
         <%--not ready yet--%>

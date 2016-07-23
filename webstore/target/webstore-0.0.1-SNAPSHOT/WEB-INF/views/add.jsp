@@ -17,6 +17,7 @@
         </div>
     </div>
 </section>
+<%@include file="template/navigation.jsp"%>
 <section class="container">
     <form:form  modelAttribute="customer" class="form-horizontal">
         <fieldset>
