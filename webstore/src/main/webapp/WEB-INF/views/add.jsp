@@ -27,6 +27,7 @@
                 <label class="control-label col-lg-2" for="name">Name</label>
                 <div class="col-lg-10">
                     <form:input id="name" path="name" type="text" class="form:input-large"/>
+                    <form:errors path="name" cssClass="text-danger"/>
                 </div>
             </div>
 
@@ -35,6 +36,7 @@
                 <div class="col-lg-10">
                     <div class="form:input-prepend">
                         <form:input id="age" path="age" type="text" class="form:input-large"/>
+                        <form:errors path="age" cssClass="text-danger"/>
                     </div>
                 </div>
             </div>
@@ -43,6 +45,7 @@
                 <label class="control-label col-lg-2" for="salary">Salary</label>
                 <div class="col-lg-10">
                     <form:input id="salary" path="salary" type="text" class="form:input-large"/>
+                    <form:errors path="salary" cssClass="text-danger"/>
                 </div>
             </div>
 

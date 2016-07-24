@@ -5,10 +5,13 @@ import com.packt.webstore.domain.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -43,10 +46,15 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/customers/add", method = RequestMethod.POST)
-	public String processAddCustomerForm(@ModelAttribute("customer") Customer customer) {
+	public String processAddCustomerForm(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
 
-		repository.addCustomer(customer);
-		return "redirect:/customers";
+		if(result.hasErrors()){
+			return "add";
+		}
+		else {
+			repository.addCustomer(customer);
+			return "redirect:/customers";
+		}
 	}
 
 	@RequestMapping(value = "customers/update/{id}", method=RequestMethod.GET)

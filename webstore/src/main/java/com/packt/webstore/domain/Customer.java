@@ -1,13 +1,23 @@
 package com.packt.webstore.domain;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by Przemek on 2016-07-19.
  */
 public class Customer{
 
+
     private int id;
+
+    @NotNull
+    @Size(min=2, max=15)
     private String name;
+    @Min(value = 18)
     private int age;
+    @Min(value = 1)
     private double salary;
 
     public Customer(double salary, int id, String name, int age) {

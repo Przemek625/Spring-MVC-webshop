@@ -36,9 +36,15 @@
 		  <artifactId>bootstrap</artifactId>
 		  <version>3.3.6</version>
 	  </dependency>
+	  <dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-validator</artifactId>
+		  <version>5.2.4.Final</version>
+	  </dependency>
   </dependencies>
   <properties>
   	<maven.compiler.source>1.7</maven.compiler.source>
   	<maven.compiler.target>1.7</maven.compiler.target>
   </properties>
+
 </project>
