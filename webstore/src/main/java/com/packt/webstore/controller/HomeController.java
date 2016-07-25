@@ -59,10 +59,10 @@ public class HomeController {
 			return "add";
 		}
 		else {
-			repository.addCustomer(customer);
+			int rowAffected = repository.addCustomer(customer);
 			if (customerImage!=null && !customerImage.isEmpty()) {
 				try {
-					customerImage.transferTo(new File(rootDirectory+"resources\\images\\"+customer.getId() + ".jpg"));
+					customerImage.transferTo(new File(rootDirectory+"resources\\images\\"+rowAffected + ".jpg"));
 					System.out.println("success");
 				} catch (Exception e) {
 					throw new RuntimeException("Product Image saving failed", e);
