@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
 
 @Controller
 public class HomeController {
@@ -46,13 +49,25 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/customers/add", method = RequestMethod.POST)
-	public String processAddCustomerForm(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+	public String processAddCustomerForm(@Valid @ModelAttribute("customer") Customer customer, BindingResult result, HttpServletRequest request) {
+
+		MultipartFile customerImage = customer.getImage();
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(rootDirectory);
 
 		if(result.hasErrors()){
 			return "add";
 		}
 		else {
 			repository.addCustomer(customer);
+			if (customerImage!=null && !customerImage.isEmpty()) {
+				try {
+					customerImage.transferTo(new File(rootDirectory+"resources\\images\\"+customer.getId() + ".jpg"));
+					System.out.println("success");
+				} catch (Exception e) {
+					throw new RuntimeException("Product Image saving failed", e);
+				}
+			}
 			return "redirect:/customers";
 		}
 	}

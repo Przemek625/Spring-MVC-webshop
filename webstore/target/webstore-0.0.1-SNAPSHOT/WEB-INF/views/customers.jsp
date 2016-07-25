@@ -25,6 +25,7 @@
 			<thead>
 			<tr>
 				<th>#</th>
+				<th>Picture</th>
 				<th>ID</th>
 				<th>Name</th>
 				<th>Age</th>
@@ -36,6 +37,7 @@
 			<c:forEach items="${customers}" var="customer">
 				<tr>
 					<th scope="row"></th>
+					<td><img src="<c:url value="/resource/images/${customer.id}.jpg"></c:url>" alt="image"  height="42" width="42"/></td>
                     <td>${customer.id}</td>
 					<td>${customer.getName()}</td>
 					<td>${customer.getAge()}</td>

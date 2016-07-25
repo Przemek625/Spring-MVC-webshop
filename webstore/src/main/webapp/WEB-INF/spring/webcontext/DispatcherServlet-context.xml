@@ -10,7 +10,9 @@
 
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.packt.webstore" />
-	
+	<mvc:resources  location="/resources/"  mapping="/resource/**"/>
+
+
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
@@ -26,5 +28,9 @@
 	<bean id ="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
 		<constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
-	
+
+	<bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000"/>
+	</bean>
+
 </beans>

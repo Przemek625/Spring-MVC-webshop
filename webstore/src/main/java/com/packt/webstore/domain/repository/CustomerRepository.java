@@ -18,4 +18,5 @@ public interface CustomerRepository {
     void addCustomer(Customer customer);
 
     void updateCustomer(Customer customer, int id);
+
 }

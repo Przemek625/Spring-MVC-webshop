@@ -19,14 +19,22 @@
 </section>
 <%@include file="template/navigation.jsp"%>
 <section class="container">
-    <form:form  modelAttribute="customer" class="form-horizontal">
+    <form:form  modelAttribute="customer" class="form-horizontal" enctype="multipart/form-data">
         <fieldset>
             <legend>Add new Customer</legend>
 
             <div class="form-group">
+                <label class="control-label col-lg-2" for="name">ID</label>
+                <div class="col-lg-10">
+                    <form:input id="name" path="id" type="id" class="form:input-large" />
+                    <form:errors path="name" cssClass="text-danger"/>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="control-label col-lg-2" for="name">Name</label>
                 <div class="col-lg-10">
-                    <form:input id="name" path="name" type="text" class="form:input-large"/>
+                    <form:input id="name" path="name" type="text" class="form:input-large" />
                     <form:errors path="name" cssClass="text-danger"/>
                 </div>
             </div>
@@ -48,7 +56,12 @@
                     <form:errors path="salary" cssClass="text-danger"/>
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="control-label col-lg-2" for="salary">Choose file</label>
+                <div class="col-lg-10">
+                    <form:input id="image" path="image" type="file" class="form:input-large" />
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
                     <input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/>

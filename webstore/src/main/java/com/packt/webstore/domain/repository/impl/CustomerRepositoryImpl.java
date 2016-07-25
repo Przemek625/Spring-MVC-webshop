@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -56,13 +57,14 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     @Override
     public void addCustomer(Customer customer) {
         //language=SQL
-        String SQL_INSERT_CUSTOMER="INSERT INTO CUSTOMERS(NAME,AGE,SALARY) VALUES (?,?,?)";
+        String SQL_INSERT_CUSTOMER="INSERT INTO CUSTOMERS(ID,NAME,AGE,SALARY) VALUES (?,?,?,?)";
 
+        int id=customer.getId();
         String name = customer.getName();
         int age = customer.getAge();
         double salary = customer.getSalary();
 
-        jdbcTemplate.update(SQL_INSERT_CUSTOMER,name,age,salary);
+        jdbcTemplate.update(SQL_INSERT_CUSTOMER,id,name,age,salary);
     }
 
     @Override
@@ -76,4 +78,5 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
         jdbcTemplate.update(SQL_UPDATE_CUSTOMER,name,age,salary,id);
     }
+
 }
