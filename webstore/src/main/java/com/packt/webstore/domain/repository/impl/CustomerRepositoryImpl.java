@@ -3,13 +3,14 @@ package com.packt.webstore.domain.repository.impl;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
 
     @Autowired
-    private SimpleJdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public CustomerRepositoryImpl() {
     }
@@ -57,13 +58,26 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     @Override
     public int addCustomer(Customer customer) {
         //language=SQL
-        String SQL_INSERT_CUSTOMER="INSERT INTO CUSTOMERS(NAME,AGE,SALARY) VALUES (?,?,?)";
+        final String SQL_INSERT_CUSTOMER="INSERT INTO CUSTOMERS(NAME,AGE,SALARY) VALUES (?,?,?)";
+        final String name = customer.getName();
+        final int age = customer.getAge();
+        final double salary = customer.getSalary();
 
-        String name = customer.getName();
-        int age = customer.getAge();
-        double salary = customer.getSalary();
+        PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(final Connection connection) throws SQLException {
+                final PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_CUSTOMER,
+                        Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1,name);
+                preparedStatement.setInt(2,age);
+                preparedStatement.setDouble(3,salary);
+                return preparedStatement;
+            }
+        };
 
-        return jdbcTemplate.update(SQL_INSERT_CUSTOMER,name,age,salary);
+        final KeyHolder holder = new GeneratedKeyHolder();
+        jdbcTemplate.update(preparedStatementCreator,holder);
+        return holder.getKey().intValue();
     }
 
     @Override
