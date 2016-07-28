@@ -82,4 +82,9 @@ public class HomeController {
 		repository.updateCustomer(customer,id);
 		return "redirect:/customers";
 	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginPage() {
+		return "login";
+	}
 }
