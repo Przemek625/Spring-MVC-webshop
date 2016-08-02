@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -16,9 +17,11 @@
 	</section>
 	<%@include file="template/navigation.jsp"%>
 	<section class="container">
+		<sec:authorize access="hasRole('ADMIN')">
         <a href="/customers/add"><button type="button" class="btn btn-info">Add Customer</button></a>
         <%--not ready yet--%>
         <a href="#"><button type="button" class="btn btn-info">Search Customer</button></a>
+		</sec:authorize>
 		<table class="table">
 			<thead>
 			<tr>
@@ -40,8 +43,11 @@
 					<td>${customer.getName()}</td>
 					<td>${customer.getAge()}</td>
 					<td>${customer.getSalary()}</td>
-                    <td><a href="/customers/delete/${customer.id}"><button type="button" class="btn btn-danger glyphicon glyphicon-trash"></button></a>
+                    <td>
+						<sec:authorize access="hasRole('ADMIN')">
+						<a href="/customers/delete/${customer.id}"><button type="button" class="btn btn-danger glyphicon glyphicon-trash"></button></a>
                         <a href="/customers/update/${customer.id}"><button type="button" class="btn btn-success glyphicon glyphicon-pencil"></button></a>
+						</sec:authorize>
                     </td>
 				</tr>
 			</c:forEach>

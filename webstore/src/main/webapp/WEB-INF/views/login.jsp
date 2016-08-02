@@ -1,34 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Signin Template for Bootstrap</title>
-    <link rel="stylesheet"  type="text/css" href="/resources/css/signin.css">
-    <link rel="stylesheet"  type="text/css" href="/resources/css/bootstrap.min.css"/>
+    <title>LOGIN</title>
 </head>
+
 <body>
+<div id="content">
 
-<div class="container">
-
-    <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <c:url value="/login" var="loginUrl"/>
+    <form action="${loginUrl}" method="post">
+        <c:if test="${param.error != null}">
+            <p>
+                Invalid username and password.
+            </p>
+        </c:if>
+        <c:if test="${param.logout != null}">
+            <p>
+                You have been logged out.
+            </p>
+        </c:if>
+        <p>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/>
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>
+        </p>
+        <input type="hidden"
+               name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
+        <button type="submit" class="btn">Log in</button>
     </form>
-</div>
-
 </body>
 </html>

@@ -27,19 +27,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .withUser("user").password("p").roles("ADMIN");
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
+        http
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/customers/add").access("hasRole('ADMIN')")
-                .and().formLogin().loginPage("/login")
-                .usernameParameter("ssoId").passwordParameter("password")
-                .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+                .and()
+                .formLogin().loginPage("/login").permitAll();
     }
 }
