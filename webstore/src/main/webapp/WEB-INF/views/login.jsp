@@ -2,36 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>LOGIN</title>
+    <title>login page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet"	type="text/css" href="/resources/css/bootstrap.min.css">
+    <link href="/resources/css/signin.css" rel="stylesheet">
 </head>
 
 <body>
-<div id="content">
+<div id="container">
 
     <c:url value="/login" var="loginUrl"/>
-    <form action="${loginUrl}" method="post">
-        <c:if test="${param.error != null}">
-            <p>
-                Invalid username and password.
-            </p>
-        </c:if>
-        <c:if test="${param.logout != null}">
-            <p>
-                You have been logged out.
-            </p>
-        </c:if>
-        <p>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username"/>
-        </p>
-        <p>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password"/>
-        </p>
-        <input type="hidden"
-               name="${_csrf.parameterName}"
-               value="${_csrf.token}"/>
-        <button type="submit" class="btn">Log in</button>
+    <form class="form-signin" action="${loginUrl}" method="post">
+        <h2 class="form-signin-heading">Please log in</h2>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus/>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Username" required autofocus/>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
     </form>
+    </div>
 </body>
 </html>
