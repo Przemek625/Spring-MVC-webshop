@@ -1,8 +1,4 @@
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -60,10 +56,10 @@
                     <input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/>
                 </div>
             </div>
-
         </fieldset>
     </form:form>
 </section>
 </body>
+<csrf disabled="true"/>
 </html>
 
