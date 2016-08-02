@@ -19,6 +19,11 @@
                     Invalid username or password.
                 </div>
             </c:if>
+            <c:if test="${param.logout != null}">
+                <div class="alert alert-success">
+                    You have been logged out.
+                </div>
+             </c:if>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus/>
             <label for="password" class="sr-only">Password</label>
