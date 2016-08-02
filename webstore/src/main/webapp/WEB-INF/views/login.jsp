@@ -14,6 +14,11 @@
     <c:url value="/login" var="loginUrl"/>
     <form class="form-signin" action="${loginUrl}" method="post">
         <h2 class="form-signin-heading">Please log in</h2>
+            <c:if test="${param.error != null}">
+                <div class="alert alert-danger">
+                    Invalid username or password.
+                </div>
+            </c:if>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus/>
             <label for="password" class="sr-only">Password</label>
