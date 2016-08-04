@@ -19,7 +19,10 @@
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
-                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+                 <li><p class="navbar-text">Signed in as
+                     <sec:authentication property="principal.username" />
+                 </p></li>
+\                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
             </sec:authorize>
         </ul>
     </div>
