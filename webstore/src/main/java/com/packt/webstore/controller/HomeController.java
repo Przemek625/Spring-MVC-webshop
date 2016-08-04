@@ -1,8 +1,11 @@
 package com.packt.webstore.controller;
 
 import com.packt.webstore.domain.Customer;
+import com.packt.webstore.domain.User;
 import com.packt.webstore.domain.repository.CustomerRepository;
+import com.packt.webstore.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +19,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 
+
 @Controller
 public class HomeController {
 
 	@Autowired
-	private CustomerRepository repository;
+	private CustomerRepository customerRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 
 	@RequestMapping("/")
@@ -33,13 +40,13 @@ public class HomeController {
 
 	@RequestMapping("/customers")
 	public String showCustomers(Model model){
-		model.addAttribute("customers",repository.getAllCustomers());
+		model.addAttribute("customers",customerRepository.getAllCustomers());
 		return "customers";
 	}
 
 	@RequestMapping("/customers/delete/{id}")
 	public String deleteCustomer(@PathVariable("id") int id){
-		repository.deleteCustomer(id);
+		customerRepository.deleteCustomer(id);
 		return "redirect:/customers";
 	}
 
@@ -59,7 +66,7 @@ public class HomeController {
 			return "add";
 		}
 		else {
-			int rowAffected = repository.addCustomer(customer);
+			int rowAffected = customerRepository.addCustomer(customer);
 			if (customerImage!=null && !customerImage.isEmpty()) {
 				try {
 					customerImage.transferTo(new File(rootDirectory+"resources\\images\\"+rowAffected + ".jpg"));
@@ -79,12 +86,29 @@ public class HomeController {
 
 	@RequestMapping(value="customers/update/{id}", method=RequestMethod.POST)
 	public String processUpdateCustomerForm(@ModelAttribute("customer") Customer customer, @PathVariable int id){
-		repository.updateCustomer(customer,id);
+		customerRepository.updateCustomer(customer,id);
 		return "redirect:/customers";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
 		return "login";
+	}
+
+	@RequestMapping(value="/register", method = RequestMethod.GET)
+	public String registerPage(@ModelAttribute("user") User user){return "register";}
+
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	public String processRegisterUser(@ModelAttribute("user") User user, BindingResult result, Model model){
+
+		try {
+			userRepository.addUser(user);
+		} catch (DuplicateKeyException e) {
+
+			model.addAttribute("usernameExist","User with this username already exists. Choose another username.");
+			return "register";
+		}
+
+		return "redirect:/login";
 	}
 }
