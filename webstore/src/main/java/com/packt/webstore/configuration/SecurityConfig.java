@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
 import javax.sql.DataSource;
 
 /**
@@ -25,11 +23,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("p").roles("ADMIN");
-    }
+        /*language=SQL*/
+        String SELECT_USER="SELECT username, password, 'true' FROM  users WHERE username=?";
+        /*language=SQL*/
+        String SELECT_ROLE_USER="SELECT username, 'ROLE_USER' FROM  users WHERE username=?" ;
 
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery(SELECT_USER)
+                .authoritiesByUsernameQuery(SELECT_ROLE_USER)
+                .and()
+                .inMemoryAuthentication()
+                .withUser("ADMIN").password("a").roles("ADMIN");
+        //need to repair it
+                //.passwordEncoder(new StandardPasswordEncoder());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/customers/add").access("hasRole('ADMIN')")
+                .antMatchers("/customers/add").access("hasRole('USER') or hasRole('ADMIN')")
                 .and()
                 .formLogin().loginPage("/login").permitAll();
     }
