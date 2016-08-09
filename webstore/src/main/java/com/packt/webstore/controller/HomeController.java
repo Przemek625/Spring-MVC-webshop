@@ -111,4 +111,9 @@ public class HomeController {
 
 		return "redirect:/login";
 	}
+
+	@RequestMapping(value="customers/details", method = RequestMethod.GET)
+	public String showCustomerDetails(){
+		return "details";
+	}
 }
