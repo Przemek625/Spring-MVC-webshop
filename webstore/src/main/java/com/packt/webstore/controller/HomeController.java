@@ -1,11 +1,14 @@
 package com.packt.webstore.controller;
 
+import com.packt.webstore.domain.Comment;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.User;
+import com.packt.webstore.domain.repository.CommentRepository;
 import com.packt.webstore.domain.repository.CustomerRepository;
 import com.packt.webstore.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
+import java.time.LocalDate;
 
 
 @Controller
@@ -29,6 +32,11 @@ public class HomeController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private CommentRepository commentRepository;
+
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate localDate;
 
 	@RequestMapping("/")
 	public String welcome(Model model) {
@@ -112,8 +120,20 @@ public class HomeController {
 		return "redirect:/login";
 	}
 
-	@RequestMapping(value="customers/details", method = RequestMethod.GET)
-	public String showCustomerDetails(){
+	@RequestMapping(value="customers/details/{id}", method = RequestMethod.GET)
+	public String showCustomerComments(@ModelAttribute("commentContent") String commentContent, @PathVariable int id, Model model){
+
+		model.addAttribute("comment",commentRepository.getAllComments(id));
+
 		return "details";
+	}
+
+	@RequestMapping(value ="customers/details/{id}", method = RequestMethod.POST)
+	public String processAddCustomerComment(@ModelAttribute("commentContent") String commentContent, @PathVariable int id){
+
+		commentRepository.
+				addComment(commentContent, localDate.now().toString(), id);
+
+		return "redirect:/customers/details/{id}";
 	}
 }

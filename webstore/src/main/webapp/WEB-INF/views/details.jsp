@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <link rel="stylesheet"	type="text/css" href="/resources/css/comment-theme.css">
@@ -36,35 +38,33 @@
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
-        <div class="form-group">
-            <textarea class="form-control" rows="5" id="comment"></textarea>
-        </div>
+            <form:form class="form-group"  modelAttribute="comment" method="post">
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" id="commentContent" name="commentContent"></textarea>
+                </div>
+                <input type="submit" value="Add a Comment" class="btn btn-primary">
+            </form:form>
         </sec:authorize>
-
-        <button type="button" class="btn btn-primary">Add a Comment</button>
         <hr>
         <ul class="media-list comments">
+            <c:forEach items="${comment}" var="comment">
             <li class="media">
                 <a class="pull-left" href="#">
                     <img class="media-object img-circle img-thumbnail"
                          src="/resources/images/guest.png" width="64" alt="Generic placeholder image">
                 </a>
                 <div class="media-body">
-                    <h5 class="media-heading pull-left">loneswan</h5>
+                    <h5 class="media-heading pull-left">${comment.commentatorName}</h5>
                     <div class="comment-info pull-left">
-                        <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i> Posted 3 weeks ago</div>
+                        <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i>Posted ${comment.commentDate}</div>
                     </div>
                     <br class="clearfix">
                     <p class="well">
-                        Awesome comment box! Awesome comment box!
-                        Awesome comment box! Awesome comment box!
-                        Awesome comment box! Awesome comment box!
-                        Awesome comment box! Awesome comment box!
-                        Awesome comment box! Awesome comment box!
-                        Awesome comment box! Awesome comment box!
+                        ${comment.commentContent}
                     </p>
                 </div>
             </li>
+            </c:forEach>
         </ul>
     </div>
 </div>

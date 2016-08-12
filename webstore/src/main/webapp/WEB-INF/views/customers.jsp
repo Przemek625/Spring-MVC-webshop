@@ -48,7 +48,7 @@
 						<a href="/customers/delete/${customer.id}"><button type="button" class="btn btn-danger glyphicon glyphicon-trash"></button></a>
                         <a href="/customers/update/${customer.id}"><button type="button" class="btn btn-success glyphicon glyphicon-pencil"></button></a>
 						</sec:authorize>
-						<a href="customers/details"><button type="button" class="btn btn-success glyphicon glyphicon-info-sign"></button></a>
+						<a href="customers/details/${customer.id}"><button type="button" class="btn btn-success glyphicon glyphicon-info-sign"></button></a>
                     </td>
 				</tr>
 			</c:forEach>

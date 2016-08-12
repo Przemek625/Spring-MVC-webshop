@@ -18,7 +18,7 @@ class UserRepositoryImpl implements UserRepository{
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
