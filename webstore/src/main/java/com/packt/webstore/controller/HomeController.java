@@ -1,11 +1,10 @@
 package com.packt.webstore.controller;
 
-import com.packt.webstore.domain.Comment;
-import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.User;
 import com.packt.webstore.domain.repository.CommentRepository;
-import com.packt.webstore.domain.repository.CustomerRepository;
 import com.packt.webstore.domain.repository.UserRepository;
+import com.packt.webstore.domain.Customer;
+import com.packt.webstore.domain.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.time.LocalDate;
-
 
 @Controller
 public class HomeController {

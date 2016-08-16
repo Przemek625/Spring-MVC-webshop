@@ -35,9 +35,7 @@ public class CommentRepositoryImpl implements CommentRepository{
     }
 
     @Override
-    public void deleteComment() {
-
-    }
+    public void deleteComment() {}
 
     @Override
     public void addComment(String commentContent, String commentDate, int customerId) {

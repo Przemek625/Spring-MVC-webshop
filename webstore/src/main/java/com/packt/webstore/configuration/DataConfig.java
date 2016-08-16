@@ -7,13 +7,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * Created by Przemek on 2016-07-27.
  */
 @Configuration
 @PropertySource(value = { "classpath:jdbc.properties" })
 public class DataConfig {
-
 
     @Value("${jdbc.className}")
     private String className;
@@ -45,6 +46,11 @@ public class DataConfig {
     @Bean
     public JdbcTemplate jdbcTemplate(DriverManagerDataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }

@@ -7,12 +7,11 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-
 /**
  * Created by Przemek on 2016-08-03.
  */
 @Repository
-class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -30,3 +29,4 @@ class UserRepositoryImpl implements UserRepository{
         jdbcTemplate.update(SQL_ADD_USER, username, passwordEncoder.encode(password));
     }
 }
+

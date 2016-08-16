@@ -9,24 +9,16 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 import java.util.List;
-
 /**
  * Created by Przemek on 2016-07-19.
  */
-
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository{
 
-
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    public CustomerRepositoryImpl() {
-    }
 
     @Override
     public List<Customer> getAllCustomers() {
