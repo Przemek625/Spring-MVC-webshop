@@ -7,6 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet"	type="text/css" href="/resources/css/bootstrap.min.css">
     <link href="/resources/css/signin.css" rel="stylesheet">
+    <!-- jQuery library -->
+    <script src="/resources/js/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="/resources/js/bootstrap.min.js"></script>
 </head>
 
 <body>
