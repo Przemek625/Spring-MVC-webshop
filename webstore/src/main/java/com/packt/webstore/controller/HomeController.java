@@ -66,14 +66,13 @@ public class HomeController {
 
 		MultipartFile customerImage = customer.getImage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		System.out.println(rootDirectory);
-
+		
 		if(result.hasErrors()){
 			return "add";
 		}
 		else {
 			int rowAffected = customerRepository.addCustomer(customer);
-			if (customerImage!=null && !customerImage.isEmpty()) {
+			if (customerImage!=null && !customerImage.isEmpty() && customerImage.getContentType()=="image/jpeg") {
 				try {
 					customerImage.transferTo(new File(rootDirectory+"resources\\images\\"+rowAffected + ".jpg"));
 					System.out.println("success");
