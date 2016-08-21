@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.time.LocalDate;
 
+
 @Controller
 public class HomeController {
 
@@ -66,7 +67,7 @@ public class HomeController {
 
 		MultipartFile customerImage = customer.getImage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		
+
 		if(result.hasErrors()){
 			return "add";
 		}
@@ -126,10 +127,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value ="customers/details/{id}", method = RequestMethod.POST)
-	public String processAddCustomerComment(@ModelAttribute("commentContent") String commentContent, @PathVariable int id){
+	public String processAddCustomerComment(@ModelAttribute("commentContent") String commentContent, @PathVariable int id, Model model){
 
 		commentRepository.
 				addComment(commentContent, localDate.now().toString(), id);
+
+		model.asMap().clear();
 
 		return "redirect:/customers/details/{id}";
 	}
