@@ -127,12 +127,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(value ="customers/details/{id}", method = RequestMethod.POST)
-	public String processAddCustomerComment(@ModelAttribute("commentContent") String commentContent, @PathVariable int id, Model model){
+	public String processAddCustomerComment(@ModelAttribute("commentContent") String commentContent, @PathVariable int id){
 
 		commentRepository.
 				addComment(commentContent, localDate.now().toString(), id);
-
-		model.asMap().clear();
 
 		return "redirect:/customers/details/{id}";
 	}

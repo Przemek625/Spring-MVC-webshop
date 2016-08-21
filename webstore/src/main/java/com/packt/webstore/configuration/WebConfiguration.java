@@ -1,5 +1,6 @@
 package com.packt.webstore.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +12,9 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import javax.annotation.PostConstruct;
 import java.util.Locale;
 /**
  * Created by Przemek on 2016-08-16.
@@ -20,6 +23,14 @@ import java.util.Locale;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.packt.webstore")
 public class WebConfiguration extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    RequestMappingHandlerAdapter requestMappingHandlerAdapter;
+
+    @PostConstruct
+    public void init() {
+        requestMappingHandlerAdapter.setIgnoreDefaultModelOnRedirect(true);
+    }
 
     @Bean
     public ViewResolver viewResolver() {
@@ -56,6 +67,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         messageSource.setBasename("messages");
         return  messageSource;
     }
+
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
