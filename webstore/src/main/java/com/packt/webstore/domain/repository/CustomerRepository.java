@@ -15,4 +15,6 @@ public interface CustomerRepository {
 
     void updateCustomer(Customer customer, int id);
 
+    boolean customerExists(int id);
+
 }

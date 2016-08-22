@@ -2,6 +2,7 @@ package com.packt.webstore.domain.repository.impl;
 
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
+import com.sun.corba.se.spi.orbutil.fsm.Guard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -85,4 +86,16 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
     }
 
+    @Override
+    public boolean customerExists(int id) {
+        //language=SQL
+        String SQL_SELECT_CUSTOMER="SELECT ID FROM CUSTOMERS WHERE ID=?";
+       List<Integer> list = jdbcTemplate.query(SQL_SELECT_CUSTOMER, new Object[] {id},(ResultSet result, int i)->{
+           return result.getInt(1);
+        });
+
+        if(list.isEmpty()) return false;
+
+        return true;
+    }
 }

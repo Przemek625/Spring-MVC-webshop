@@ -16,9 +16,8 @@
 	<section>
 		<div class="jumbotron" style="margin: 0%">
 			<div class="container">
-				<h1> ${greeting} </h1>
+				<h1><spring:message code="welcome.message"/></h1>
 				<p> ${tagline} </p>
-				<spring:message code="welcome.message"/>
 			</div>
 		</div>
 	</section>

@@ -5,6 +5,7 @@ import com.packt.webstore.domain.repository.CommentRepository;
 import com.packt.webstore.domain.repository.UserRepository;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
+import exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
 import java.time.LocalDate;
-
 
 @Controller
 public class HomeController {
@@ -121,7 +122,11 @@ public class HomeController {
 	@RequestMapping(value="customers/details/{id}", method = RequestMethod.GET)
 	public String showCustomerComments(@ModelAttribute("commentContent") String commentContent, @PathVariable int id, Model model){
 
-		model.addAttribute("comment",commentRepository.getAllComments(id));
+
+		if(customerRepository.customerExists(id)) {
+			model.addAttribute("comment", commentRepository.getAllComments(id));
+		}
+		else throw new CustomerNotFoundException();
 
 		return "details";
 	}
