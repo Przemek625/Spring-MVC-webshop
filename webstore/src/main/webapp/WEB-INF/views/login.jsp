@@ -33,6 +33,7 @@
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus/>
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required autofocus/>
+            <input type="checkbox" name="remember_me"/> Remember Me
         <button type="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
     </form>
     </div>

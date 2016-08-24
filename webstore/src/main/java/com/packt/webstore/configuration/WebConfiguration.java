@@ -68,7 +68,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         return  messageSource;
     }
 
-
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

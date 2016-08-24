@@ -48,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/").permitAll()
                 .antMatchers("/customers/add").access("hasRole('USER') or hasRole('ADMIN')")
                 .and()
-                .formLogin().loginPage("/login").permitAll();
+                .formLogin().loginPage("/login").permitAll()
+                .and()
+                .rememberMe().tokenValiditySeconds(20170000).key("remember-me").rememberMeParameter("remember-me");
     }
 }
