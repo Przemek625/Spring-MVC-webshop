@@ -35,8 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .inMemoryAuthentication()
                 .withUser("ADMIN").password("a").roles("ADMIN");
-        //need to repair it
-                //.passwordEncoder(new StandardPasswordEncoder());
     }
 
     @Override
