@@ -13,14 +13,14 @@
 <title>Welcome</title>
 </head>
 <body>
-	<section>
-		<div class="jumbotron" style="margin: 0%">
+<%@include file="template/navigation.jsp"%>
+	<section style="padding-top: 50px">
+		<div class="jumbotron" style="margin-top: 0% ">
 			<div class="container">
 				<h1><spring:message code="welcome.message"/></h1>
 				<p> ${tagline} </p>
 			</div>
 		</div>
 	</section>
-	<%@include file="template/navigation.jsp"%>
 </body>
 </html>

@@ -11,15 +11,15 @@
     <title>Products</title>
 </head>
 <body>
-<section>
-    <div class="jumbotron" style="margin: 0%">
+<%@include file="template/navigation.jsp"%>
+<section style="padding-top: 50px">
+    <div class="jumbotron">
         <div class="container">
             <h1>Customers</h1>
             <p>Add Customer</p>
         </div>
     </div>
 </section>
-<%@include file="template/navigation.jsp"%>
 <section class="container">
     <form:form  modelAttribute="customer" class="form-horizontal" enctype="multipart/form-data">
         <fieldset>

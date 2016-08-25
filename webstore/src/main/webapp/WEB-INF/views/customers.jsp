@@ -12,15 +12,15 @@
 <title>Products</title>
 </head>
 <body>
-	<section>
-		<div class="jumbotron" style="margin: 0%">
+<%@include file="template/navigation.jsp"%>
+	<section  style="padding-top: 50px">
+		<div class="jumbotron">
 			<div class="container">
 				<h1>Customers</h1>
 				<p>All customers of our shop!</p>
 			</div>
 		</div>
 	</section>
-	<%@include file="template/navigation.jsp"%>
 	<section class="container">
 		<sec:authorize access="hasRole('ADMIN')">
         <a href="/customers/add"><button type="button" class="btn btn-info">Add Customer</button></a>
