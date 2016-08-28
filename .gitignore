@@ -53,3 +53,4 @@ out
 test-output
 atlassian-ide-plugin.xml
 .gradletasknamecache
+webstore/src/main/java/com/packt/webstore/configuration/test.java
