@@ -7,8 +7,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import javax.sql.DataSource;
+import java.util.Properties;
 /**
  * Created by Przemek on 2016-07-27.
  */
@@ -51,6 +54,18 @@ public class DataConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public LocalSessionFactoryBean localSessionFactoryBean(DataSource dataSource){
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+        sessionFactoryBean.setDataSource(dataSource);
+        sessionFactoryBean.setPackagesToScan("com.packt.webstore");
+        Properties properties = new Properties();
+        properties.setProperty("dialect"," org.hibernate.dialect.MySQLDialect");
+        sessionFactoryBean.setHibernateProperties(properties);
+        sessionFactoryBean.setHibernateProperties(null);
+        return sessionFactoryBean;
     }
 
 }
