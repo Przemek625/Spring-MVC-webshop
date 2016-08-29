@@ -11,10 +11,11 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     private int productId;
     @Column(name = "NAME")
     private String productName;
-    private double productOldPrice;
+    //private double productOldPrice;
     @Column(name = "PRICE")
     private double productPrice;
     @Column(name = "CATEGORY")
@@ -34,9 +35,9 @@ public class Product {
         return productName;
     }
 
-    public double getProductOldPrice() {
-        return productOldPrice;
-    }
+//    public double getProductOldPrice() {
+//        return productOldPrice;
+//    }
 
     public double getProductPrice() {
         return productPrice;
@@ -66,9 +67,9 @@ public class Product {
         this.productName = productName;
     }
 
-    public void setProductOldPrice(double productOldPrice) {
-        this.productOldPrice = productOldPrice;
-    }
+//    public void setProductOldPrice(double productOldPrice) {
+//        this.productOldPrice = productOldPrice;
+//    }
 
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
