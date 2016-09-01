@@ -19,7 +19,6 @@ public class UserRepositoryImpl implements UserRepository {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     @Override
     public void addUser(User user) throws DuplicateKeyException {
         /*language=SQL*/

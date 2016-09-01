@@ -12,7 +12,7 @@
         <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/customers">Customers</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="/products">Products</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">

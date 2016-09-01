@@ -9,7 +9,7 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="/resources/js/bootstrap.min.js"></script>
-<title>Products</title>
+<title>Customers</title>
 </head>
 <body>
 <%@include file="template/navigation.jsp"%>

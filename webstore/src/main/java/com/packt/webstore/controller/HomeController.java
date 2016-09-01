@@ -5,6 +5,7 @@ import com.packt.webstore.domain.repository.CommentRepository;
 import com.packt.webstore.domain.repository.UserRepository;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
+import com.packt.webstore.domain.repository.impl.ProductRepositoryImpl;
 import exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -35,6 +36,9 @@ public class HomeController {
 	@Autowired
 	private CommentRepository commentRepository;
 
+	@Autowired
+	private ProductRepositoryImpl productRepository;
+
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate localDate;
 
@@ -42,7 +46,7 @@ public class HomeController {
 	public String welcome(Model model) {
 		model.addAttribute("greeting", "Welcome to Web Store!");
 		model.addAttribute("tagline", "The one and only amazing web store");
-		
+
 		return "welcome";
 	}
 
@@ -138,5 +142,11 @@ public class HomeController {
 				addComment(commentContent, localDate.now().toString(), id);
 
 		return "redirect:/customers/details/{id}";
+	}
+
+	@RequestMapping("/products")
+	public String showProducts(Model model){
+		model.addAttribute("products",productRepository.getAllProduct());
+		return "products";
 	}
 }
