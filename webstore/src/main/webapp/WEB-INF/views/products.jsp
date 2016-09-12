@@ -57,7 +57,11 @@
                     <p>${product.productDescription}</p>
 
                     <p style="text-align: right"><del>${product.productPrice}</del></p>
-                    <p class="price">${product.productPrice}</p>
+
+                    <p style="font-size: 300%">
+                        <a href="#"><i class="glyphicon glyphicon-shopping-cart" style="font-size: 130%"></i></a>
+                        <span class="pull-right">${product.productPrice}</span>
+                    </p>
 
                 </div>
             </div>
