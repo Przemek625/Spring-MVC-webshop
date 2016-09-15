@@ -8,6 +8,10 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.sql.DataSource;
@@ -66,6 +70,26 @@ public class DataConfig {
         sessionFactoryBean.setHibernateProperties(properties);
         sessionFactoryBean.setHibernateProperties(null);
         return sessionFactoryBean;
+    }
+
+//JPA configuration
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter(){
+        HibernateJpaVendorAdapter hjv = new HibernateJpaVendorAdapter();
+        hjv.setDatabase(Database.MYSQL);
+        hjv.setShowSql(true);
+        hjv.setGenerateDdl(false);
+        hjv.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
+        return hjv;
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(
+            DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+        LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
+        lcemfb.setDataSource(dataSource);
+        lcemfb.setJpaVendorAdapter(jpaVendorAdapter);
+        return lcemfb;
     }
 
 }
