@@ -71,25 +71,4 @@ public class DataConfig {
         sessionFactoryBean.setHibernateProperties(null);
         return sessionFactoryBean;
     }
-
-//JPA configuration
-    @Bean
-    public JpaVendorAdapter jpaVendorAdapter(){
-        HibernateJpaVendorAdapter hjv = new HibernateJpaVendorAdapter();
-        hjv.setDatabase(Database.MYSQL);
-        hjv.setShowSql(true);
-        hjv.setGenerateDdl(false);
-        hjv.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
-        return hjv;
-    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(
-            DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
-        LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
-        lcemfb.setDataSource(dataSource);
-        lcemfb.setJpaVendorAdapter(jpaVendorAdapter);
-        return lcemfb;
-    }
-
 }
