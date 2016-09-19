@@ -2,10 +2,10 @@ package com.packt.webstore.controller;
 
 import com.packt.webstore.domain.User;
 import com.packt.webstore.domain.repository.CommentRepository;
+import com.packt.webstore.domain.repository.ProductRepository;
 import com.packt.webstore.domain.repository.UserRepository;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
-import com.packt.webstore.domain.repository.impl.ProductRepositoryImpl;
 import exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
 import java.time.LocalDate;
@@ -37,7 +36,7 @@ public class HomeController {
 	private CommentRepository commentRepository;
 
 	@Autowired
-	private ProductRepositoryImpl productRepository;
+	private ProductRepository productRepository;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate localDate;
