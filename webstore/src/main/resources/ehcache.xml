@@ -3,4 +3,8 @@
            maxBytesLocalHeap="50m"
            timeToLiveSeconds="1000">
     </cache>
+    <cache name="customersCache"
+           maxBytesLocalHeap="50m"
+           timeToLiveSeconds="1000">
+    </cache>
 </ehcache>
