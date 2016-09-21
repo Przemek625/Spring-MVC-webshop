@@ -142,10 +142,5 @@ public class HomeController {
 
 		return "redirect:/customers/details/{id}";
 	}
-
-	@RequestMapping("/products")
-	public String showProducts(Model model){
-		model.addAttribute("products",productRepository.getAllProduct());
-		return "products";
-	}
+	
 }

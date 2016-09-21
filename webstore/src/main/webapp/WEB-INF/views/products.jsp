@@ -63,6 +63,17 @@
                         <span class="pull-right">${product.productPrice}</span>
                     </p>
 
+                    <div class="ratings">
+                        <p class="pull-right">31 reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </div>

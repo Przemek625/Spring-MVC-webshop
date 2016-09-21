@@ -1,6 +1,7 @@
 package com.packt.webstore.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Przemek on 2016-08-25.
@@ -26,6 +27,8 @@ public class Product {
     private boolean productAvailable;
     @Column(name = "QUANTITY")
     private int productQuantity;
+    @Column(name ="DATE")
+    private Date date;
 
     public int getPrductId() {
         return productId;
@@ -89,5 +92,13 @@ public class Product {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
