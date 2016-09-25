@@ -5,6 +5,8 @@ import com.packt.webstore.domain.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.security.RolesAllowed;
 import java.sql.ResultSet;
 import java.util.List;
 /**
@@ -35,9 +37,11 @@ public class CommentRepositoryImpl implements CommentRepository{
     }
 
     @Override
+    @RolesAllowed("USER")
     public void deleteComment() {}
 
     @Override
+    @RolesAllowed("USER")
     public void addComment(String commentContent, String commentDate, int customerId) {
           /*language=SQL*/
         String SQL_ADD_COMMENT="Insert into comments(comment_content, comment_date, customer_id) value (?,?, ?)";

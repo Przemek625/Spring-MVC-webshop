@@ -4,12 +4,15 @@ import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
 import com.sun.corba.se.spi.orbutil.fsm.Guard;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.security.RolesAllowed;
 import java.sql.*;
 import java.util.List;
 /**
@@ -41,6 +44,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
+    @RolesAllowed("ADMIN")
     public void deleteCustomer(int id) {
         //language=SQL
         String SQL_DELETE="DELETE FROM CUSTOMERS WHERE ID=?";
@@ -49,6 +53,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
+    @RolesAllowed("ADMIN")
     public int addCustomer(Customer customer) {
         //language=SQL
         final String SQL_INSERT_CUSTOMER="INSERT INTO CUSTOMERS(NAME,AGE,SALARY) VALUES (?,?,?)";
@@ -74,6 +79,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
+    @RolesAllowed("ADMIN")
     public void updateCustomer(Customer customer, int id){
         //language=SQL
         String SQL_UPDATE_CUSTOMER="UPDATE CUSTOMERS SET NAME=?,AGE=?,SALARY=? WHERE ID=?";
